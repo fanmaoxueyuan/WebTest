@@ -10,12 +10,13 @@ class LoginPage(BaseDriver):
     _username = (By.ID,'name')
     _password = (By.ID,'pass')
 
-
     def login_with_username(self,username,passwd):
         self.driver.find_element(*LoginPage._username).send_keys(username)
         self.driver.find_element(*LoginPage._password).send_keys(passwd)
         self.driver.find_element(By.CSS_SELECTOR,'[value="登录"]').click()
 
+    def login_fail_text(self):
+        return  self.driver.find_element(By.CSS_SELECTOR,'[class="alert alert-error"]>strong').text
 
     def go_reset_passwd_page(self):
         self.driver.find_element(By.LINK_TEXT,'忘记密码了?').click()
